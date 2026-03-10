@@ -10,28 +10,21 @@ import {
   Image
 } from "react-native";
 import Collapsible from "react-native-collapsible";
-
 import Toast from "react-native-toast-message";
-
 import { usePomodoroSettings } from '../hooks/usePomodoroSettings';
 import { useTheme } from "../hooks";
-
 
 export default function Pomodoro() {
     const {assets, colors, sizes} = useTheme();
   const [isOpen, setIsOpen] = useState(true);
   const {
-  focusTime,
-  pauseTime,
-  setFocusTime,
-  setPauseTime
+    focusTime,
+    pauseTime,
+    setFocusTime,
+    setPauseTime
 } = usePomodoroSettings();
 
   const updateSettings = async (focus: number, pause: number) => {
-
-    // Aqui você chamaria Firebase ou API
-    console.log("Salvar no backend", focus, pause);
-
     Toast.show({
       type: "success",
       text1: "Configuração atualizada",
@@ -53,8 +46,6 @@ export default function Pomodoro() {
 
   return (
     <ScrollView style={styles.container}>
-
-      {/* ACCORDION */}
       <TouchableOpacity
         onPress={() => setIsOpen(!isOpen)}
         style={styles.header}>
@@ -63,9 +54,8 @@ export default function Pomodoro() {
             source={assets.arrow}
             style={{marginLeft: sizes.inputPadding, tintColor: colors.icon, transform: [{rotate: '90deg'}]}}
         />
-        
-      </TouchableOpacity>
 
+      </TouchableOpacity>
       <Collapsible collapsed={!isOpen}>
         <View style={styles.accordionContent}>
 
@@ -92,14 +82,9 @@ export default function Pomodoro() {
 
         </View>
       </Collapsible>
-
-      {/* INPUTS */}
-
       <View style={styles.footer}>
-
         <View style={styles.inputGroup}>
           <Text>Pausa em minutos</Text>
-
           <TextInput
             style={styles.input}
             keyboardType="numeric"
@@ -107,15 +92,12 @@ export default function Pomodoro() {
             onChangeText={(value) => setPauseTime(+value)}
             onFocus={() => setIsOpen(false)}
           />
-
           <Text style={styles.helper}>
             Defina as pausas entre as tarefas
           </Text>
         </View>
-
         <View style={styles.inputGroup}>
           <Text>Tempo de foco</Text>
-
           <TextInput
             style={styles.input}
             keyboardType="numeric"
@@ -123,16 +105,12 @@ export default function Pomodoro() {
             onChangeText={(value) => setFocusTime(+value)}
             onFocus={() => setIsOpen(false)}
           />
-
           <Text style={styles.helper}>
             Defina o tempo máximo de foco
           </Text>
         </View>
-
       </View>
-
       <Toast />
-
     </ScrollView>
   );
 }
@@ -142,7 +120,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignSelf: "center",
-    //backgroundColor: '',
     padding: 24,
   },
 

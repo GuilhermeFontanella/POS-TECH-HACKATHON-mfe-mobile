@@ -1,15 +1,18 @@
-import React, {useEffect} from 'react';
-import {Platform, StatusBar} from 'react-native';
-import {useFonts} from 'expo-font';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Platform, StatusBar } from 'react-native';
+import { useFonts } from 'expo-font';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import Menu from './Menu';
-import {useData, ThemeProvider, TranslationProvider} from '../hooks';
+import { useData, ThemeProvider, TranslationProvider } from '../hooks';
+import { PomodoroModalProvider } from '../context/PomodoroModalContext';
+import PomodoroModal from '../components/PomodoroModal';
+import { PomodoroTimerProvider } from '../context/PomodoroTimerContext';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 export default () => {
-  const {isDark, theme, setTheme} = useData();
+  const { isDark, theme, setTheme } = useData();
 
   /* set the status bar based on isDark constant */
   useEffect(() => {
@@ -57,9 +60,14 @@ export default () => {
   return (
     <TranslationProvider>
       <ThemeProvider theme={theme} setTheme={setTheme}>
-        <NavigationContainer theme={navigationTheme}>
-          <Menu />
-        </NavigationContainer>
+        <PomodoroTimerProvider>
+          <NavigationContainer theme={navigationTheme}>
+            <PomodoroModalProvider>
+              <Menu />
+              <PomodoroModal />
+            </PomodoroModalProvider>
+          </NavigationContainer>
+        </PomodoroTimerProvider>
       </ThemeProvider>
     </TranslationProvider>
   );
