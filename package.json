@@ -26,6 +26,7 @@
     "expo-modules-core": "~2.5.0",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "2.2.3",
+    "firebase": "^12.10.0",
     "i18n-js": "4.5.1",
     "lodash.debounce": "^4.0.8",
     "react": "19.0.0",

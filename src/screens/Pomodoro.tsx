@@ -12,13 +12,20 @@ import {
 import Collapsible from "react-native-collapsible";
 
 import Toast from "react-native-toast-message";
+
+import { usePomodoroSettings } from '../hooks/usePomodoroSettings';
 import { useTheme } from "../hooks";
+
 
 export default function Pomodoro() {
     const {assets, colors, sizes} = useTheme();
   const [isOpen, setIsOpen] = useState(true);
-  const [pauseTime, setPauseTime] = useState("5");
-  const [focusTime, setFocusTime] = useState("25");
+  const {
+  focusTime,
+  pauseTime,
+  setFocusTime,
+  setPauseTime
+} = usePomodoroSettings();
 
   const updateSettings = async (focus: number, pause: number) => {
 
@@ -96,8 +103,8 @@ export default function Pomodoro() {
           <TextInput
             style={styles.input}
             keyboardType="numeric"
-            value={pauseTime}
-            onChangeText={setPauseTime}
+            value={String(pauseTime)}
+            onChangeText={(value) => setPauseTime(+value)}
             onFocus={() => setIsOpen(false)}
           />
 
@@ -112,8 +119,8 @@ export default function Pomodoro() {
           <TextInput
             style={styles.input}
             keyboardType="numeric"
-            value={focusTime}
-            onChangeText={setFocusTime}
+            value={String(focusTime)}
+            onChangeText={(value) => setFocusTime(+value)}
             onFocus={() => setIsOpen(false)}
           />
 
