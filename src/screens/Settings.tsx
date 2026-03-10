@@ -2,13 +2,13 @@ import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import WebView from 'react-native-webview';
 
-const Home = () => {
+const Settings = () => {
 
   return (
     <SafeAreaView style={styles.container}>
       <WebView
         style={styles.webview}
-        source={{ uri: 'http://192.168.0.105:4175/' }}
+        source={{ uri: 'http://192.168.0.105:5173/' }}
         javaScriptEnabled
         domStorageEnabled
         startInLoadingState
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   webview: { flex: 1 },
 })
 
-export default Home;
+export default Settings;

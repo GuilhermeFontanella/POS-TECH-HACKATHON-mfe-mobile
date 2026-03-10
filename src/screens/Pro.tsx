@@ -15,7 +15,7 @@ const Pro = () => {
     };
   }, []);
 
-  const handleWebLink = useCallback((url) => Linking.openURL(url), []);
+  const handleWebLink = useCallback((url: any) => Linking.openURL(url), []);
 
   return (
     <Image

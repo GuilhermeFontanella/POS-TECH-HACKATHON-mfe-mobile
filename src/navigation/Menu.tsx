@@ -1,20 +1,17 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Alert, Animated, Linking, StyleSheet} from 'react-native';
-
+import { Animated, StyleSheet } from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentComponentProps,
   DrawerContentScrollView,
   useDrawerStatus,
 } from '@react-navigation/drawer';
-
 import Screens from './Screens';
-import {Block, Text, Switch, Button, Image} from '../components';
+import {Block, Text, Button, Image} from '../components';
 import {useData, useTheme, useTranslation} from '../hooks';
 
 const Drawer = createDrawerNavigator();
 
-/* drawer menu screens navigation */
 const ScreensStack = () => {
   const {colors} = useTheme();
   const isDrawerOpen = useDrawerStatus() === 'open';
@@ -74,25 +71,15 @@ const DrawerContent = (
   const handleNavigation = useCallback(
     (to: string) => {
       setActive(to);
-      // Properly navigate to screens in the stack
       navigation.navigate('Screens', { screen: to });
     },
     [navigation, setActive],
   );
 
-  const handleWebLink = useCallback((url: string) => Linking.openURL(url), []);
-
-  // screen list for Drawer menu
   const screens = [
-    {name: 'Minhas tarefas', to: 'Home', icon: assets.home},
-    
-    {name: 'Perfil do usuário', to: 'Components', icon: assets.users},
-    {name: 'Acessibilidade', to: 'Articles', icon: assets.star},
-    {name: 'Ajustes', to: 'Pro', icon: assets.rental},
-    // {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
-    // {name: t('screens.settings'), to: 'Pro', icon: assets.settings},
-    // {name: t('screens.register'), to: 'Register', icon: assets.register},
-    // {name: t('screens.extra'), to: 'Pro', icon: assets.extras},
+    {name: 'Tarefas', to: 'Home', icon: assets.home},
+    {name: 'Preferências', to: 'Settings', icon: assets.rental},
+    {name: 'Pomodoro', to: 'Pomodoro', icon: assets.clock},
   ];
 
   return (
@@ -105,10 +92,8 @@ const DrawerContent = (
       <Block paddingHorizontal={sizes.padding}>
         <Block flex={0} row align="center" marginBottom={sizes.l}>
           <Image
-            //radius={50}
             width={43}
             height={40}
-            //color={colors.card}
             source={assets.logo}
             marginRight={sizes.sm}
           />
